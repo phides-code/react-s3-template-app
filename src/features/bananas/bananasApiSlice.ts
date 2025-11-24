@@ -17,7 +17,6 @@ const PATH = 'bananas';
 export const bananasApiSlice = createApi({
     baseQuery: createAwsSignedBaseQuery({
         baseUrl: import.meta.env.VITE_BANANAS_SERVICE_URL as string,
-        region: import.meta.env.VITE_AWS_REGION as string,
         identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID as string,
     }),
     reducerPath: `${PATH}Api`,

@@ -36,7 +36,6 @@ interface CachedCredentials {
 /**
  * Configuration options for the AWS signed base query
  * @property baseUrl - Base URL for API requests
- * @property region - AWS region for the API and Cognito Identity Pool
  * @property identityPoolId - Cognito Identity Pool ID for authentication
  * @property service - AWS service name (default: 'execute-api')
  * @property timeout - Request timeout in milliseconds (default: 30000)
@@ -44,7 +43,6 @@ interface CachedCredentials {
  */
 interface AwsSignedBaseQueryOptions {
     baseUrl: string;
-    region: string;
     identityPoolId: string;
     service?: string;
     timeout?: number;
@@ -63,7 +61,6 @@ interface AwsSignedBaseQueryOptions {
  */
 export const createAwsSignedBaseQuery = ({
     baseUrl,
-    region,
     identityPoolId,
     service = 'execute-api',
     timeout = 30000,
@@ -75,6 +72,7 @@ export const createAwsSignedBaseQuery = ({
 > => {
     // Cache credentials to avoid unnecessary Cognito calls
     let cachedCredentials: CachedCredentials | null = null;
+    const region = import.meta.env.VITE_AWS_REGION as string;
 
     /**
      * Helper to get (and cache) AWS credentials from Cognito Identity Pool
@@ -108,8 +106,8 @@ export const createAwsSignedBaseQuery = ({
 
                 if (
                     !Credentials?.AccessKeyId ||
-                    !Credentials?.SecretKey ||
-                    !Credentials?.SessionToken
+                    !Credentials.SecretKey ||
+                    !Credentials.SessionToken
                 ) {
                     throw new Error('Failed to retrieve AWS credentials');
                 }
@@ -195,7 +193,7 @@ export const createAwsSignedBaseQuery = ({
                               // Convert Headers object to plain object
                               Array.from(headers.entries()).map(([k, v]) => [
                                   k,
-                                  String(v),
+                                  v,
                               ])
                           )
                         : Object.fromEntries(
