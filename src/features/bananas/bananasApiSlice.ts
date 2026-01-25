@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import type { Banana } from '../../types';
-import { createAwsSignedBaseQuery } from '../../app/awsSignedBaseQuery';
+import { createAwsSignedBaseQuery } from '../../app/createAwsSignedBaseQuery';
 
 interface BananasApiResponse {
     data: Banana[] | null;
@@ -17,15 +17,20 @@ const PATH = 'bananas';
 export const bananasApiSlice = createApi({
     baseQuery: createAwsSignedBaseQuery({
         baseUrl: import.meta.env.VITE_BANANAS_SERVICE_URL as string,
-        identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID as string,
     }),
     reducerPath: `${PATH}Api`,
     endpoints: (build) => ({
         getBananas: build.query<BananasApiResponse, void>({
-            query: () => PATH,
+            query: () => ({
+                url: PATH,
+                method: 'GET',
+            }),
         }),
         getBananaById: build.query<BananaApiResponse, string>({
-            query: (id) => `${PATH}/${id}`,
+            query: (id) => ({
+                url: `${PATH}/${id}`,
+                method: 'GET',
+            }),
         }),
         postBanana: build.mutation<BananaApiResponse, Partial<Banana>>({
             query: (newBanana) => ({
