@@ -39,6 +39,7 @@ export function createAwsSignedBaseQuery({
                 path: target.pathname + target.search,
                 headers: {
                     'content-type': 'application/json',
+                    host: target.host,
                 },
                 body: body ? JSON.stringify(body) : undefined,
             });
