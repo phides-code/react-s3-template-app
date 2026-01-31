@@ -32,11 +32,18 @@ export function createAwsSignedBaseQuery({
             // Build request
             const target = new URL(url, baseUrl);
 
+            // Convert query string into key/value map
+            const query: Record<string, string> = {};
+            target.searchParams.forEach((value, key) => {
+                query[key] = value;
+            });
+
             const request = new HttpRequest({
                 method,
                 protocol: target.protocol,
                 hostname: target.hostname,
-                path: target.pathname + target.search,
+                path: target.pathname, // ONLY the path
+                query, // query params passed separately
                 headers: {
                     'content-type': 'application/json',
                     host: target.host,
