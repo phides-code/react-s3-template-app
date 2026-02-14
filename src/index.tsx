@@ -5,19 +5,6 @@ import { App } from './components/App';
 import { store } from './app/store';
 import './index.css';
 
-import { Amplify } from 'aws-amplify';
-
-const identityPoolId = import.meta.env.VITE_IDENTITY_POOL_ID as string;
-
-Amplify.configure({
-    Auth: {
-        Cognito: {
-            identityPoolId,
-            allowGuestAccess: true,
-        },
-    },
-});
-
 const container = document.getElementById('root');
 
 if (container) {

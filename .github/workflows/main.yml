@@ -19,9 +19,7 @@ jobs:
               run: |
                   touch .env
                   echo VITE_AWS_REGION=${{ secrets.AWS_REGION }} >> .env
-
                   echo VITE_BANANAS_SERVICE_URL=${{ secrets.BANANAS_SERVICE_URL }} >> .env
-                  echo VITE_IDENTITY_POOL_ID=${{ secrets.IDENTITY_POOL_ID }} >> .env
 
             - name: Build
               run: npm run build
@@ -31,21 +29,6 @@ jobs:
               with:
                   name: dist
                   path: dist
-
-    # test:
-    #     runs-on: ubuntu-latest
-    #     needs: build
-    #     steps:
-    #         - uses: actions/checkout@v4.1.1
-
-    #         - name: Setup Node.js
-    #           uses: actions/setup-node@v4.0.2
-
-    #         - name: Install dependencies for testing
-    #           run: npm install
-
-    #         - name: Run Tests
-    #           run: npm run test
 
     deploy:
         runs-on: ubuntu-latest

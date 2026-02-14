@@ -16,12 +16,7 @@
         "type-check": "tsc -b --noEmit"
     },
     "dependencies": {
-        "@aws-crypto/sha256-browser": "^5.2.0",
-        "@aws-sdk/client-cognito-identity": "^3.821.0",
-        "@aws-sdk/fetch-http-handler": "^3.370.0",
-        "@aws-sdk/signature-v4": "^3.370.0",
         "@reduxjs/toolkit": "^2.6.1",
-        "aws-amplify": "^6.16.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-redux": "^9.2.0",

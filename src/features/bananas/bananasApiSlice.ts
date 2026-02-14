@@ -1,6 +1,5 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Banana } from '../../types';
-import { createAwsSignedBaseQuery } from '../../app/createAwsSignedBaseQuery';
 
 interface BananasApiResponse {
     data: Banana[] | null;
@@ -15,7 +14,7 @@ interface BananaApiResponse {
 const PATH = 'bananas';
 
 export const bananasApiSlice = createApi({
-    baseQuery: createAwsSignedBaseQuery({
+    baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_BANANAS_SERVICE_URL as string,
     }),
     reducerPath: `${PATH}Api`,
