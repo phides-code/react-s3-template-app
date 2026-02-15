@@ -21,32 +21,32 @@ export const bananasApiSlice = createApi({
     endpoints: (build) => ({
         getBananas: build.query<BananasApiResponse, void>({
             query: () => ({
-                url: PATH,
+                url: '',
                 method: 'GET',
             }),
         }),
         getBananaById: build.query<BananaApiResponse, string>({
             query: (id) => ({
-                url: `${PATH}/${id}`,
+                url: `/${id}`,
                 method: 'GET',
             }),
         }),
         postBanana: build.mutation<BananaApiResponse, Partial<Banana>>({
             query: (newBanana) => ({
-                url: PATH,
+                url: '',
                 method: 'POST',
                 body: newBanana,
             }),
         }),
         deleteBanana: build.mutation<BananaApiResponse, string>({
             query: (id) => ({
-                url: `${PATH}/${id}`,
+                url: `/${id}`,
                 method: 'DELETE',
             }),
         }),
         putBanana: build.mutation<BananaApiResponse, Partial<Banana>>({
             query: (updatedBanana) => ({
-                url: `${PATH}/${updatedBanana.id}`,
+                url: `/${updatedBanana.id}`,
                 method: 'PUT',
                 body: updatedBanana,
             }),
