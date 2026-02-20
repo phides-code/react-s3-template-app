@@ -13,7 +13,7 @@ const AddBanana = ({ setShowSuccess }: AddBananaProps) => {
         content: '',
     });
 
-    const [postRecipe, { isLoading: isPostLoading, isError }] =
+    const [postBanana, { isLoading: isPostLoading, isError }] =
         usePostBananaMutation();
     const { refetch, isFetching: isGetFetching } = useGetBananasQuery();
 
@@ -34,7 +34,7 @@ const AddBanana = ({ setShowSuccess }: AddBananaProps) => {
         console.log('Adding new Banana:', newBanana);
 
         try {
-            const postResult = await postRecipe(newBanana).unwrap();
+            const postResult = await postBanana(newBanana).unwrap();
 
             if (postResult.errorMessage) {
                 throw new Error(postResult.errorMessage);

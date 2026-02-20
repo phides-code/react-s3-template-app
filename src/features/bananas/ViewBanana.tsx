@@ -20,7 +20,7 @@ const ViewBanana = () => {
         isFetching: isQueryFetching,
         refetch: refetchQuery,
     } = useGetBananaByIdQuery(bananaId as string);
-    const [putRecipe, { isLoading: isPutLoading, isError: isPutError }] =
+    const [putBanana, { isLoading: isPutLoading, isError: isPutError }] =
         usePutBananaMutation();
     const { isFetching: isGetFetching, refetch: refetchGet } =
         useGetBananasQuery();
@@ -47,7 +47,7 @@ const ViewBanana = () => {
         console.log('Updating Banana:', updatedContent);
 
         try {
-            const putResult = await putRecipe({
+            const putResult = await putBanana({
                 id: bananaId as string,
                 content: updatedContent,
             }).unwrap();
